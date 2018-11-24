@@ -14,12 +14,12 @@ const Connection = require('interface-connection').Connection
 const toPull = require('stream-to-pull-stream')
 const once = require('once')
 const setImmediate = require('async/setImmediate')
-const webrtcSupport = require('webrtcsupport')
 const utils = require('./utils')
 const cleanUrlSIO = utils.cleanUrlSIO
 const cleanMultiaddr = utils.cleanMultiaddr
 
-const noop = once(() => {})
+const noop = once(() => {
+})
 
 const sioOptions = {
   transports: ['websocket'],
@@ -43,8 +43,12 @@ class WebRTCStar {
 
     this.discovery = new EE()
     this.discovery.tag = 'webRTCStar'
-    this.discovery.start = (callback) => { setImmediate(callback) }
-    this.discovery.stop = (callback) => { setImmediate(callback) }
+    this.discovery.start = (callback) => {
+      setImmediate(callback)
+    }
+    this.discovery.stop = (callback) => {
+      setImmediate(callback)
+    }
 
     this.listenersRefs = {}
     this._peerDiscovered = this._peerDiscovered.bind(this)
@@ -133,9 +137,9 @@ class WebRTCStar {
     listener.listen = (ma, callback) => {
       callback = callback ? once(callback) : noop
 
-      if (!webrtcSupport.support && !this.wrtc) {
-        return setImmediate(() => callback(new Error('no WebRTC support')))
-      }
+      // if (!webrtcSupport.support && !this.wrtc) {
+      //   return setImmediate(() => callback(new Error('no WebRTC support')))
+      // }
 
       this.maSelf = ma
 

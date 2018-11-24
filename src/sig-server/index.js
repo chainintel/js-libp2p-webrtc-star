@@ -8,12 +8,7 @@ const path = require('path');
 
 exports = module.exports;
 
-exports.start = async (options, callback) => {
-  if (typeof options === 'function') {
-    callback = options;
-    options = {};
-  }
-
+exports.start = async (options = {}) => {
   const port = options.port || config.hapi.port;
   const host = options.host || config.hapi.host;
 
@@ -22,7 +17,7 @@ exports.start = async (options, callback) => {
     host: host
   });
 
-  await http.register({ olugin: require('inert') });
+  await http.register({ plugin: require('inert') });
   await http.start();
 
   log('signaling server has started on: ' + http.info.uri);

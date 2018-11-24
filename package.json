@@ -97,5 +97,8 @@
     "greenkeeperio-bot <support@greenkeeper.io>",
     "interfect <interfect@gmail.com>",
     "ᴠɪᴄᴛᴏʀ ʙᴊᴇʟᴋʜᴏʟᴍ <victorbjelkholm@gmail.com>"
-  ]
+  ],
+  "prettier": {
+    "arrowParens": "always"
+  }
 }

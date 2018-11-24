@@ -42,10 +42,10 @@ class WebRTCStar {
 
     this.discovery = new EE();
     this.discovery.tag = 'webRTCStar';
-    this.discovery.start = callback => {
+    this.discovery.start = (callback) => {
       setImmediate(callback);
     };
-    this.discovery.stop = callback => {
+    this.discovery.stop = (callback) => {
       setImmediate(callback);
     };
 
@@ -83,7 +83,7 @@ class WebRTCStar {
     const conn = new Connection(toPull.duplex(channel));
     let connected = false;
 
-    channel.on('signal', signal => {
+    channel.on('signal', (signal) => {
       sioClient.emit('ss-handshake', {
         intentId: intentId,
         srcMultiaddr: this.maSelf.toString(),
@@ -94,7 +94,7 @@ class WebRTCStar {
 
     channel.once('timeout', () => callback(new Error('timeout')));
 
-    channel.once('error', err => {
+    channel.once('error', (err) => {
       if (!connected) {
         callback(err);
       }
@@ -102,7 +102,7 @@ class WebRTCStar {
 
     // NOTE: aegir segfaults if we do .once on the socket.io event emitter and we
     // are clueless as to why.
-    sioClient.on('ws-handshake', offer => {
+    sioClient.on('ws-handshake', (offer) => {
       if (offer.intentId === intentId && offer.err) {
         return callback(new Error(offer.err));
       }
@@ -117,7 +117,7 @@ class WebRTCStar {
 
         channel.once('close', () => conn.destroy());
 
-        conn.getObservedAddrs = callback => callback(null, [ma]);
+        conn.getObservedAddrs = (callback) => callback(null, [ma]);
 
         callback(null, conn);
       });
@@ -151,7 +151,7 @@ class WebRTCStar {
       );
 
       listener.io.once('connect_error', callback);
-      listener.io.once('error', err => {
+      listener.io.once('error', (err) => {
         listener.emit('error', err);
         listener.emit('close');
       });
@@ -192,7 +192,7 @@ class WebRTCStar {
         const conn = new Connection(toPull.duplex(channel));
 
         channel.once('connect', () => {
-          conn.getObservedAddrs = callback => {
+          conn.getObservedAddrs = (callback) => {
             return callback(null, [offer.srcMultiaddr]);
           };
 
@@ -200,7 +200,7 @@ class WebRTCStar {
           handler(conn);
         });
 
-        channel.once('signal', signal => {
+        channel.once('signal', (signal) => {
           offer.signal = signal;
           offer.answer = true;
           listener.io.emit('ss-handshake', offer);
@@ -210,7 +210,7 @@ class WebRTCStar {
       }
     };
 
-    listener.close = callback => {
+    listener.close = (callback) => {
       callback = callback ? once(callback) : noop;
 
       listener.io.emit('ss-leave');
@@ -221,7 +221,7 @@ class WebRTCStar {
       });
     };
 
-    listener.getAddrs = callback => {
+    listener.getAddrs = (callback) => {
       setImmediate(() => callback(null, [this.maSelf]));
     };
 
@@ -234,7 +234,7 @@ class WebRTCStar {
       multiaddrs = [multiaddrs];
     }
 
-    return multiaddrs.filter(ma => {
+    return multiaddrs.filter((ma) => {
       if (ma.protoNames().indexOf('p2p-circuit') > -1) {
         return false;
       }

@@ -1,6 +1,6 @@
 {
   "name": "libp2p-webrtc-star",
-  "version": "0.15.5",
+  "version": "0.15.6",
   "description": "libp2p WebRTC transport that includes a discovery mechanism provided by the signalling-star",
   "leadMaintainer": "Vasco Santos <vasco.santos@moxy.studio>",
   "main": "src/index.js",
@@ -22,7 +22,8 @@
     "release-minor": "aegir release --type minor -t node -t browser",
     "release-major": "aegir release --type major -t node -t browser",
     "coverage": "aegir coverage",
-    "coverage-publish": "aegir coverage --provider coveralls"
+    "coverage-publish": "aegir coverage --provider coveralls",
+    "dopublish": "npm publish --access=public"
   },
   "pre-push": [
     "lint",

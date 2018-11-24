@@ -1,56 +1,46 @@
-'use strict'
+'use strict';
 
-const Hapi = require('hapi')
-const config = require('./config')
-const log = config.log
-const epimetheus = require('epimetheus')
-const path = require('path')
+const Hapi = require('hapi');
+const config = require('./config');
+const log = config.log;
+const epimetheus = require('epimetheus');
+const path = require('path');
 
-exports = module.exports
+exports = module.exports;
 
-exports.start = (options, callback) => {
+exports.start = async (options, callback) => {
   if (typeof options === 'function') {
-    callback = options
-    options = {}
+    callback = options;
+    options = {};
   }
 
-  const port = options.port || config.hapi.port
-  const host = options.host || config.hapi.host
+  const port = options.port || config.hapi.port;
+  const host = options.host || config.hapi.host;
 
-  const http = new Hapi.Server(config.hapi.options)
-
-  http.connection({
+  const http = new Hapi.Server({
     port: port,
     host: host
-  })
+  });
 
-  http.register({ register: require('inert') }, (err) => {
-    if (err) {
-      return callback(err)
-    }
+  await http.register({ olugin: require('inert') });
+  await http.start();
 
-    http.start((err) => {
-      if (err) {
-        return callback(err)
-      }
+  log('signaling server has started on: ' + http.info.uri);
 
-      log('signaling server has started on: ' + http.info.uri)
+  http.peers = require('./routes-ws')(http, options.metrics).peers;
 
-      http.peers = require('./routes-ws')(http, options.metrics).peers
-
-      http.route({
-        method: 'GET',
-        path: '/',
-        handler: (request, reply) => reply.file(path.join(__dirname, 'index.html'), {
-          confine: false
-        })
+  http.route({
+    method: 'GET',
+    path: '/',
+    handler: (request, reply) =>
+      reply.file(path.join(__dirname, 'index.html'), {
+        confine: false
       })
+  });
 
-      callback(null, http)
-    })
+  if (options.metrics) {
+    epimetheus.instrument(http);
+  }
 
-    if (options.metrics) { epimetheus.instrument(http) }
-  })
-
-  return http
-}
+  return http;
+};

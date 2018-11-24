@@ -1,6 +1,6 @@
 {
-  "name": "libp2p-webrtc-star",
-  "version": "0.15.5",
+  "name": "@idn/libp2p-webrtc-star",
+  "version": "0.15.6",
   "description": "libp2p WebRTC transport that includes a discovery mechanism provided by the signalling-star",
   "leadMaintainer": "Vasco Santos <vasco.santos@moxy.studio>",
   "main": "src/index.js",
@@ -25,7 +25,6 @@
     "coverage-publish": "aegir coverage --provider coveralls"
   },
   "pre-push": [
-    "lint",
     "test"
   ],
   "engines": {
@@ -46,7 +45,7 @@
   },
   "homepage": "https://github.com/libp2p/js-libp2p-webrtc-star#readme",
   "devDependencies": {
-    "aegir": "^14.0.0",
+    "aegir": "^17.1.1",
     "bl": "^2.0.0",
     "chai": "^4.1.2",
     "dirty-chai": "^2.0.1",
@@ -61,7 +60,7 @@
     "debug": "^4.1.0",
     "detect-node": "^2.0.4",
     "epimetheus": "^1.0.92",
-    "hapi": "^16.6.2",
+    "hapi": "^17.8.1",
     "inert": "^5.1.2",
     "interface-connection": "~0.3.2",
     "mafmt": "^6.0.2",

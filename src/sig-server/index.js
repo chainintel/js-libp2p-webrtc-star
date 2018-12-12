@@ -17,7 +17,7 @@ exports.start = async (options = {}) => {
     host: host
   })
 
-  await http.register({ plugin: require('inert') })
+  await http.register(require('inert'))
   await http.start()
 
   log('signaling server has started on: ' + http.info.uri)
@@ -35,7 +35,7 @@ exports.start = async (options = {}) => {
   })
 
   if (options.metrics) {
-    epimetheus.instrument(http)
+    // epimetheus.instrument(http)
   }
 
   return http

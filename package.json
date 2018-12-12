@@ -25,9 +25,7 @@
     "coverage-publish": "aegir coverage --provider coveralls",
     "dopublish": "npm publish --access=public"
   },
-  "pre-push": [
-    "test"
-  ],
+  "pre-push": [],
   "engines": {
     "node": ">=6.0.0",
     "npm": ">=3.0.0"

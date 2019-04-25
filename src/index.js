@@ -63,6 +63,11 @@ class WebRTCStar {
 
     const intentId = (~~(Math.random() * 1e9)).toString(36) + Date.now();
 
+    if(!this
+      .listenersRefs[Object.keys(this.listenersRefs)[0]]){
+      log('Could not create connection:', 'no listener')
+      return callback('no listener')
+    }
     const sioClient = this.listenersRefs[Object.keys(this.listenersRefs)[0]].io;
 
     const spOptions = { initiator: true, trickle: false };

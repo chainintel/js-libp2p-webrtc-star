@@ -1,10 +1,33 @@
 <a name="0.15.9"></a>
 ## [0.15.9](https://github.com/libp2p/js-libp2p-webrtc-star/compare/v0.15.7...v0.15.9) (2018-11-24)
 
+<a name="0.15.8"></a>
+## [0.15.8](https://github.com/libp2p/js-libp2p-webrtc-star/compare/v0.15.7...v0.15.8) (2019-01-10)
+
+
+### Bug Fixes
+
+* reduce bundle size ([#165](https://github.com/libp2p/js-libp2p-webrtc-star/issues/165)) ([cb96de8](https://github.com/libp2p/js-libp2p-webrtc-star/commit/cb96de8))
+
 
 
 <a name="0.15.7"></a>
-## [0.15.7](https://github.com/libp2p/js-libp2p-webrtc-star/compare/v0.15.5...v0.15.7) (2018-11-24)
+## [0.15.7](https://github.com/libp2p/js-libp2p-webrtc-star/compare/v0.15.6...v0.15.7) (2019-01-04)
+
+
+### Features
+
+* only send new peers, not the whole peer list ([e12089b](https://github.com/libp2p/js-libp2p-webrtc-star/commit/e12089b))
+
+
+
+<a name="0.15.6"></a>
+## [0.15.6](https://github.com/libp2p/js-libp2p-webrtc-star/compare/v0.15.3...v0.15.6) (2018-11-26)
+
+
+### Bug Fixes
+
+* catch RTCPeerConnection failed connections ([b65d509](https://github.com/libp2p/js-libp2p-webrtc-star/commit/b65d509))
 
 
 
